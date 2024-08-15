@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSA Encryption & Decryption</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url(../images/bc3.webp);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #1d3a6d37;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #000;
+            text-align: center;
+            width: 500px;
+        }
+        input[type="text"], input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background-color: #f05454;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #d64545;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>RSA Encryption & Decryption</h2>
+        <p>Where n is equal to n = p * q, so we add the values to p and q and then to e.</p>
+        <input type="number" id="p" placeholder="Enter p value">
+        <input type="number" id="q" placeholder="Enter q value">
+        <input type="number" id="e" placeholder="Enter e value">
+        <input type="text" id="message" placeholder="Message">
+        <div>
+            <button onclick="encryptMessage()">Encrypt</button>
+            <button onclick="decryptMessage()">Decrypt</button>
+            <button onclick="resetFields()">Reset</button>
+        </div>
+        <p>Encrypted Message: <span id="encryptedMessage"></span></p>
+        <p>Decrypted Message: <span id="decryptedMessage"></span></p>
+    </div>
+
+    <script>
+        // Fast Modular Exponentiation
+function fastModularExponentiation(base, exponent, modulus) {
+    let result = 1;
+    base = base % modulus;
+    while (exponent > 0) {
+        if (exponent % 2 === 1) {
+            result = (result * base) % modulus;
+        }
+        exponent = Math.floor(exponent / 2);
+        base = (base * base) % modulus;
+    }
+    return result;
+}
+
+// Encrypt the message
+function encryptMessage() {
+    const p = parseInt(document.getElementById('p').value);
+    const q = parseInt(document.getElementById('q').value);
+    const e = parseInt(document.getElementById('e').value);
+    const message = document.getElementById('message').value;
+
+    if (!p || !q || !e || !message) {
+        alert('Please fill in all fields');
+        return;
+    }
+
+    const n = p * q;
+    const messageNumbers = message.split('').map(char => char.charCodeAt(0));
+
+    const encryptedMessage = messageNumbers.map(m => fastModularExponentiation(m, e, n)).join(' ');
+
+    document.getElementById('encryptedMessage').innerText = encryptedMessage;
+}
+
+// Decrypt the message
+function decryptMessage() {
+    const p = parseInt(document.getElementById('p').value);
+    const q = parseInt(document.getElementById('q').value);
+    const e = parseInt(document.getElementById('e').value);
+    const encryptedMessage = document.getElementById('encryptedMessage').innerText;
+
+    if (!p || !q || !e || !encryptedMessage) {
+        alert('Please fill in all fields and encrypt a message first');
+        return;
+    }
+
+    const n = p * q;
+    const phi_n = (p - 1) * (q - 1);
+
+    // Find the private key exponent d
+    let d = 0;
+    for (let i = 1; i < phi_n; i++) {
+        if ((i * e) % phi_n === 1) {
+            d = i;
+            break;
+        }
+    }
+
+    const encryptedNumbers = encryptedMessage.split(' ').map(Number);
+    const decryptedMessage = encryptedNumbers.map(c => String.fromCharCode(fastModularExponentiation(c, d, n))).join('');
+
+    document.getElementById('decryptedMessage').innerText = decryptedMessage;
+}
+
+// Reset all fields
+function resetFields() {
+    document.getElementById('p').value = '';
+    document.getElementById('q').value = '';
+    document.getElementById('e').value = '';
+    document.getElementById('message').value = '';
+    document.getElementById('encryptedMessage').innerText = '';
+    document.getElementById('decryptedMessage').innerText = '';
+}
+
+    </script>
+
+</body>
+</html>

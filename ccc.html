@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('../images/bc2.avif') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            padding: 20px;
+            border-radius: 10px;
+            background: url('') no-repeat center center;
+            background-size: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.057);
+            text-align: center;
+            position: relative;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.429);
+            border-radius: 10px;
+            z-index: 1;
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 5px 0 20px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            width: calc(50% - 12px);
+            padding: 10px;
+            margin: 10px 6px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            background-color: #007bff;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .fa-icon {
+            margin-right: 8px;
+        }
+        #result {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="overlay"></div>
+    <div class="content">
+        <h1>Caesar Cipher</h1>
+        <label for="text">Enter text:</label>
+        <input type="text" id="text" placeholder="Enter text here">
+        
+        <label for="shift">Enter shift value:</label>
+        <input type="number" id="shift" placeholder="Enter shift value here">
+        
+        <div>
+            <button onclick="encrypt()">
+                <i class="fas fa-lock fa-icon"></i> Encrypt
+            </button>
+            <button onclick="decrypt()">
+                <i class="fas fa-unlock fa-icon"></i> Decrypt
+            </button>
+        </div>
+        
+        <h2>Result:</h2>
+        <p id="result"></p>
+    </div>
+</div>
+
+<script>
+    function caesarCipher(str, shift) {
+        return str.replace(/[a-z]/gi, function(c) {
+            const isUpperCase = c >= 'A' && c <= 'Z';
+            const base = isUpperCase ? 65 : 97;
+            return String.fromCharCode(((c.charCodeAt(0) - base + shift) % 26 + 26) % 26 + base);
+        });
+    }
+
+    function encrypt() {
+        const text = document.getElementById('text').value;
+        const shift = parseInt(document.getElementById('shift').value) || 0;
+        const result = caesarCipher(text, shift);
+        document.getElementById('result').textContent = result;
+    }
+
+    function decrypt() {
+        const text = document.
+
+
+getElementById('text').value;
+        const shift = parseInt(document.getElementById('shift').value) || 0;
+        const result = caesarCipher(text, -shift);
+        document.getElementById('result').textContent = result;
+    }
+</script>
+
+</body>
+</html>

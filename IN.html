@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Caesar Cipher and RSA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .header {
+            background-color: #3333338c;
+            color: rgb(20, 15, 15);
+            padding: 20px;
+            text-align: center;
+        }
+        .navbar {
+            overflow: hidden;
+            background: url(../images/bc1.webp);
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #1a0707;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .content {
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            color: #555;
+            line-height: 1.6;
+        }
+        .footer {
+           background: url(../Conclusion/images/bc1.webp);
+            color: white;
+            text-align: center;
+            padding: 5px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Introduction to Caesar Cipher and RSA Encryption</h1>
+    </div>
+    
+    <div class="navbar">
+        <a href="#caesar">Caesar Cipher</a>
+        <a href="#rsa">RSA Encryption</a>
+        <a href="#comparison">Comparison</a>
+    </div>
+
+    <div class="content">
+        <!-- Caesar Cipher Section -->
+        <section id="caesar">
+            <h2>Caesar Cipher</h2>
+            <p>The Caesar Cipher is one of the simplest and most well-known encryption techniques. Named after Julius Caesar, who reportedly used it in his private correspondence, this cipher works by shifting the letters of the alphabet by a fixed number of positions. For example, with a shift of 3, 'A' becomes 'D', 'B' becomes 'E', and so on.</p>
+            <p><strong>Example:</strong> If the shift is 3, the word "HELLO" becomes "KHOOR".</p>
+        </section>
+
+        <!-- RSA Encryption Section -->
+        <section id="rsa">
+            <h2>RSA Encryption</h2>
+            <p>RSA is a widely used encryption method in modern computing, named after its inventors Rivest, Shamir, and Adleman. Unlike the Caesar Cipher, which is a form of symmetric encryption, RSA is an asymmetric encryption technique, meaning it uses a pair of keys: a public key for encryption and a private key for decryption.</p>
+            <p>The security of RSA encryption is based on the mathematical challenge of factoring large prime numbers. RSA is extensively used for secure data transmission, including in HTTPS and digital signatures.</p>
+            <p><strong>Example:</strong> If you encrypt the message "HELLO" using someone's public key, only their private key can decrypt it.</p>
+        </section>
+
+        <!-- Comparison Section -->
+        <section id="comparison">
+            <h2>Comparison between Caesar Cipher and RSA</h2>
+            <p>While both the Caesar Cipher and RSA encryption are used for securing messages, they differ significantly in complexity, security, and application.</p>
+            <ul>
+                <li><strong>Complexity:</strong> Caesar Cipher is simple and easy to implement, whereas RSA involves complex mathematical operations.</li>
+                <li><strong>Security:</strong> Caesar Cipher is easily breakable, especially with modern computing power. RSA, on the other hand, offers a much higher level of security.</li>
+                <li><strong>Application:</strong> Caesar Cipher is mostly used for educational purposes and simple obfuscation. RSA is used in a wide range of secure communication systems, including internet protocols and secure emails.</li>
+            </ul>
+        </section>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024.</p>
+    </div>
+</body>
+</html>
